@@ -10,6 +10,7 @@ import {
 import { useModal } from '@/hooks/use-modal-store';
 import { ServerWithMembersWithProfiles } from '@/types';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { UserAvatar } from '@/components/user-avatar';
 
 export const MembersModal = () => {
 
@@ -31,7 +32,9 @@ export const MembersModal = () => {
         </DialogHeader>
         <ScrollArea className='mt-8 max-h-[420px] pr-6'>
           {server?.members?.map((member) => (
-            <div key={member.id} className='flex items-center gap-x-2 mb-6'><UserAvatar /></div>
+            <div key={member.id} className='flex items-center gap-x-2 mb-6'>
+              <UserAvatar />
+            </div>
           ))}
         </ScrollArea>
       </DialogContent>
