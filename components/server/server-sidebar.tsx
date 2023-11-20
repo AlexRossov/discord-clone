@@ -20,7 +20,7 @@ const iconMap = {
 const roleIconMap = {
   [MemberRole.GUEST]: null,
   [MemberRole.MODERATOR]: <ShieldCheck className='mr-2 h-4 w-4 text-indigo-500' />,
-  [MemberRole.ADMIN]: <ShieldAlert className='mr-2 h-4 w-4 text-indigo-500' />
+  [MemberRole.ADMIN]: <ShieldAlert className='mr-2 h-4 w-4 text-rose-500' />
 };
 
 export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
@@ -80,7 +80,46 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
       <ServerHeader server={server} role={role} />
       <ScrollArea className='flex-1 px-3'>
         <div className='mt-2'>
-          <ServerSearch />
+          <ServerSearch
+            data={[
+              {
+                label: 'Text Channels',
+                type: 'channel',
+                data: textChannels?.map((channel) => ({
+                  id: channel.id,
+                  name: channel.name,
+                  icon: iconMap[channel.type]
+                }))
+              },
+              {
+                label: 'Voice Channels',
+                type: 'channel',
+                data: audioChannels?.map((channel) => ({
+                  id: channel.id,
+                  name: channel.name,
+                  icon: iconMap[channel.type]
+                }))
+              },
+              {
+                label: 'Video Channels',
+                type: 'channel',
+                data: videoChannels?.map((channel) => ({
+                  id: channel.id,
+                  name: channel.name,
+                  icon: iconMap[channel.type]
+                }))
+              },
+              {
+                label: 'Members',
+                type: 'member',
+                data: members?.map((member) => ({
+                  id: member.id,
+                  name: member.profile.name,
+                  icon: roleIconMap[member.role]
+                }))
+              }
+            ]}
+          />
         </div>
       </ScrollArea>
     </div>
